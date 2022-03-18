@@ -52,30 +52,7 @@
   <!-- spinner -->
   <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
 
-  <!-- cards -->
-  <mat-card *ngFor="let repo of repos | async" class="card">
-    <header class="card__header">
-      <div>
-        <h2>{{ repo.name }}</h2>
-        <h3>Stars: {{ repo.stargazers.totalCount }}</h3>
-      </div>
-      <div class="card__author-info">
-        <img
-          class="card__avatar"
-          src="{{ repo.owner.avatarUrl }}"
-          alt="{{ repo.owner.login }}"
-        />
-        <h5>
-          Author:<br /><strong>{{ repo.owner.login }}</strong>
-        </h5>
-      </div>
-    </header>
-    <p class="card__description">Description: {{ repo.description }}</p>
-    <a href="{{ repo.url }}" target="_blank">{{ repo.url }}</a>
-    <div *ngIf="repo.latestRelease" class="card__date">
-      <time
-        >Latest release date: {{ repo.latestRelease.updatedAt | date }}</time
-      >
-    </div>
-  </mat-card>
+  <div *ngFor="let repo of repos | async">
+    <app-item [repo]="repo"></app-item>
+  </div>
 </div>

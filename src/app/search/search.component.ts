@@ -44,7 +44,7 @@ export class SearchComponent implements OnInit {
         query: searchRepositories,
       })
       .pipe(
-        map(({ data, loading }) => {
+        map(({ data }) => {
           this.loading = false;
           return data.search.repos.map((obj: any) => obj.repo);
         })

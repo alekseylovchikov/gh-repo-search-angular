@@ -8,6 +8,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SearchComponent } from './search.component';
+import { ItemModule } from '../item/item.module';
 
 @NgModule({
   declarations: [SearchComponent],
@@ -21,6 +22,7 @@ import { SearchComponent } from './search.component';
     MatInputModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    ItemModule,
   ],
   exports: [SearchComponent],
 })
