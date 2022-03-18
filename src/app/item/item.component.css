@@ -7,6 +7,10 @@
   justify-content: space-between;
 }
 
+.card__repo-name {
+  word-break: break-all;
+}
+
 .card__avatar {
   width: 50px;
   border-radius: 50%;
@@ -16,10 +20,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100px;
 }
 
 .card__author-info > h5 {
   text-align: center;
+}
+
+.card__author-info > h5 > strong {
+  word-break: break-all;
 }
 
 .card__description {

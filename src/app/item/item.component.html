@@ -1,7 +1,9 @@
 <mat-card class="card">
   <header class="card__header">
     <div>
-      <h2>{{ repo.name }}</h2>
+      <h2 class="card__repo-name" title="{{ repo.name }}">
+        {{ repo.name }}
+      </h2>
       <h3>Stars: {{ repo.stargazers.totalCount }}</h3>
     </div>
     <div class="card__author-info">
@@ -15,7 +17,8 @@
       </h5>
     </div>
   </header>
-  <p class="card__description">Description: {{ repo.description }}</p>
+  <strong>Description:</strong>
+  <p class="card__description">{{ repo.description }}</p>
   <a href="{{ repo.url }}" target="_blank">{{ repo.url }}</a>
   <div *ngIf="repo.latestRelease" class="card__date">
     <time>Latest release date: {{ repo.latestRelease.updatedAt | date }}</time>
