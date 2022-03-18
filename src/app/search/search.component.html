@@ -1,0 +1,81 @@
+<div class="container">
+  <!-- get public access token -->
+  <form
+    class="form"
+    (submit)="setPublicAccessToken()"
+    *ngIf="!publicAccessToken"
+  >
+    <mat-form-field class="search-form-field" appearance="fill">
+      <mat-label>Public access token</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Paste here..."
+        [formControl]="accessToken"
+      />
+    </mat-form-field>
+
+    <button
+      [disabled]="!accessToken.value.trim()"
+      (click)="setPublicAccessToken()"
+      type="submit"
+      mat-raised-button
+      color="primary"
+    >
+      Set token
+    </button>
+  </form>
+
+  <!-- search form -->
+  <form class="form" *ngIf="publicAccessToken" (submit)="onSubmit()">
+    <mat-form-field class="search-form-field" appearance="fill">
+      <mat-label>Search</mat-label>
+      <input
+        type="text"
+        matInput
+        placeholder="Start typing repository name..."
+        [formControl]="repoName"
+      />
+    </mat-form-field>
+
+    <button
+      [disabled]="!repoName.value.trim() || loading"
+      (click)="onSubmit()"
+      type="submit"
+      mat-raised-button
+      color="primary"
+    >
+      Search
+    </button>
+  </form>
+
+  <!-- spinner -->
+  <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
+
+  <!-- cards -->
+  <mat-card *ngFor="let repo of repos | async" class="card">
+    <header class="card__header">
+      <div>
+        <h2>{{ repo.name }}</h2>
+        <h3>Stars: {{ repo.stargazers.totalCount }}</h3>
+      </div>
+      <div class="card__author-info">
+        <img
+          class="card__avatar"
+          src="{{ repo.owner.avatarUrl }}"
+          alt="{{ repo.owner.login }}"
+        />
+        <h5>
+          Author:<br /><strong>{{ repo.owner.login }}</strong>
+        </h5>
+      </div>
+    </header>
+    <p class="card__description">Description: {{ repo.description }}</p>
+    <a href="{{ repo.url }}" target="_blank">{{ repo.url }}</a>
+    <div *ngIf="repo.latestRelease" class="card__date">
+      <time
+        >Latest release date: {{ repo.latestRelease.updatedAt | date }}</time
+      >
+    </div>
+  </mat-card>
+</div>
