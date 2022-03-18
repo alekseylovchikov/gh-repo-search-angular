@@ -14,3 +14,15 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.error-message {
+  color: tomato;
+  text-align: center;
+  margin: 16px 0;
+}
+
+.error-message > p {
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 28px;
+}

@@ -55,4 +55,8 @@
   <div *ngFor="let repo of repos | async">
     <app-item [repo]="repo"></app-item>
   </div>
+
+  <div class="error-message" *ngIf="!!error">
+    <p>{{ error }}</p>
+  </div>
 </div>

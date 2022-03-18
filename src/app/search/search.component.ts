@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Apollo, Subscription } from 'apollo-angular';
-import { EmptyObject } from 'apollo-angular/build/types';
-import { map, Observable } from 'rxjs';
+import { Apollo } from 'apollo-angular';
+import { map, Observable, catchError, of } from 'rxjs';
+
 import { searchRepositories } from '../queries/search-repositories';
 
 @Component({
@@ -14,6 +14,7 @@ export class SearchComponent implements OnInit {
   repoName = new FormControl('');
   accessToken = new FormControl('');
   loading: boolean = false;
+  error: string = '';
   repos!: Observable<any[]>;
   publicAccessToken: string = localStorage.getItem('token') || '';
 
@@ -30,6 +31,7 @@ export class SearchComponent implements OnInit {
 
   onSubmit(): void {
     this.loading = true;
+    this.error = '';
 
     this.repos = this.apollo
       .query<any>({
@@ -47,6 +49,11 @@ export class SearchComponent implements OnInit {
         map(({ data }) => {
           this.loading = false;
           return data.search.repos.map((obj: any) => obj.repo);
+        }),
+        catchError((err) => {
+          this.loading = false;
+          this.error = err.message;
+          return of([]);
         })
       );
   }
