@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Apollo } from 'apollo-angular';
 import { map, Observable, catchError, of } from 'rxjs';
 
-import { searchRepositories } from 'src/app/search/search.query';
+import { GetReposGQL } from 'src/app/search/search.query';
 import { Repo } from 'src/app/types/repo.type';
 
 @Component({
@@ -19,7 +18,7 @@ export class SearchComponent implements OnInit {
   repos!: Observable<Repo[]>;
   publicAccessToken: string = localStorage.getItem('token') || '';
 
-  constructor(private apollo: Apollo) {}
+  constructor(private getReposGql: GetReposGQL) {}
 
   ngOnInit(): void {
     this.publicAccessToken = localStorage.getItem('token') || '';
@@ -34,18 +33,17 @@ export class SearchComponent implements OnInit {
     this.loading = true;
     this.error = '';
 
-    this.repos = this.apollo
-      .query<any>({
-        context: {
-          headers: {
-            Authorization: `Bearer ${this.publicAccessToken}`,
+    this.repos = this.getReposGql
+      .fetch(
+        { repoName: this.repoName.value },
+        {
+          context: {
+            headers: {
+              Authorization: `Bearer ${this.publicAccessToken}`,
+            },
           },
-        },
-        variables: {
-          repoName: this.repoName.value,
-        },
-        query: searchRepositories,
-      })
+        }
+      )
       .pipe(
         map(({ data }) => {
           this.loading = false;
