@@ -7,9 +7,10 @@ import { InMemoryCache, createHttpLink } from '@apollo/client/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { environment } from '../environments/environment';
+import { environment } from 'src/environments/environment';
+import { SearchModule } from 'src/app/search/search.module';
+
 import { AppComponent } from './app.component';
-import { SearchModule } from './search/search.module';
 
 const link = createHttpLink({
   uri: environment.graphQLUrl,

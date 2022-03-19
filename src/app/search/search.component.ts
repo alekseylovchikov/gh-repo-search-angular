@@ -3,7 +3,8 @@ import { FormControl } from '@angular/forms';
 import { Apollo } from 'apollo-angular';
 import { map, Observable, catchError, of } from 'rxjs';
 
-import { searchRepositories } from '../queries/search-repositories';
+import { searchRepositories } from 'src/app/search/search.query';
+import { Repo } from 'src/app/types/repo.type';
 
 @Component({
   selector: 'app-search',
@@ -15,7 +16,7 @@ export class SearchComponent implements OnInit {
   accessToken = new FormControl('');
   loading: boolean = false;
   error: string = '';
-  repos!: Observable<any[]>;
+  repos!: Observable<Repo[]>;
   publicAccessToken: string = localStorage.getItem('token') || '';
 
   constructor(private apollo: Apollo) {}
