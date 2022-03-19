@@ -7,11 +7,11 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { SearchComponent } from 'src/app/search/search.component';
-import { ItemModule } from 'src/app/item/item.module';
+import { ContainerComponent } from 'src/app/search/components/container/container.component';
+import { ItemComponent } from './components/item/item.component';
 
 @NgModule({
-  declarations: [SearchComponent],
+  declarations: [ContainerComponent, ItemComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -22,8 +22,7 @@ import { ItemModule } from 'src/app/item/item.module';
     MatInputModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    ItemModule,
   ],
-  exports: [SearchComponent],
+  exports: [ContainerComponent, ItemComponent],
 })
 export class SearchModule {}

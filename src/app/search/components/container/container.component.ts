@@ -6,11 +6,11 @@ import { GetReposGQL } from 'src/app/search/search.query';
 import { Repo } from 'src/app/types/repo.type';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css'],
+  selector: 'app-container',
+  templateUrl: './container.component.html',
+  styleUrls: ['./container.component.css'],
 })
-export class SearchComponent implements OnInit {
+export class ContainerComponent implements OnInit {
   repoName = new FormControl('');
   accessToken = new FormControl('');
   loading: boolean = false;
