@@ -16,16 +16,16 @@ export class ContainerComponent implements OnInit {
   loading: boolean = false;
   error: string = '';
   repos!: Observable<Repo[]>;
-  publicAccessToken: string = localStorage.getItem('token') || '';
+  personalAccessToken: string = localStorage.getItem('token') || '';
 
   constructor(private getReposGql: GetReposGQL) {}
 
   ngOnInit(): void {
-    this.publicAccessToken = localStorage.getItem('token') || '';
+    this.personalAccessToken = localStorage.getItem('token') || '';
   }
 
-  setPublicAccessToken() {
-    this.publicAccessToken = this.accessToken.value;
+  setPersonalAccessToken() {
+    this.personalAccessToken = this.accessToken.value;
     localStorage.setItem('token', this.accessToken.value);
   }
 
@@ -39,7 +39,7 @@ export class ContainerComponent implements OnInit {
         {
           context: {
             headers: {
-              Authorization: `Bearer ${this.publicAccessToken}`,
+              Authorization: `Bearer ${this.personalAccessToken}`,
             },
           },
         }
