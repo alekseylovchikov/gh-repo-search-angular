@@ -9,9 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ContainerComponent } from 'src/app/search/components/container/container.component';
 import { ItemComponent } from './components/item/item.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
-  declarations: [ContainerComponent, ItemComponent],
+  declarations: [ContainerComponent, ItemComponent, SpinnerComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -23,6 +24,6 @@ import { ItemComponent } from './components/item/item.component';
     MatCardModule,
     MatProgressSpinnerModule,
   ],
-  exports: [ContainerComponent, ItemComponent],
+  exports: [ContainerComponent, ItemComponent, SpinnerComponent],
 })
 export class SearchModule {}

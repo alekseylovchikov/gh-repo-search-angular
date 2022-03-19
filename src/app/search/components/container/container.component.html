@@ -2,7 +2,8 @@
   <!-- get personal access tokens -->
   <form
     class="form"
-    (submit)="setPersonalAccessToken()"
+    [formGroup]="form"
+    (ngSubmit)="setPersonalAccessToken()"
     *ngIf="!personalAccessToken"
   >
     <mat-form-field class="search-form-field" appearance="fill">
@@ -11,12 +12,12 @@
         type="text"
         matInput
         placeholder="Paste here..."
-        [formControl]="accessToken"
+        formControlName="accessToken"
       />
     </mat-form-field>
 
     <button
-      [disabled]="!accessToken.value.trim()"
+      [disabled]="!form.value.accessToken.trim()"
       (click)="setPersonalAccessToken()"
       type="button"
       mat-raised-button
@@ -27,19 +28,24 @@
   </form>
 
   <!-- search form -->
-  <form class="form" *ngIf="personalAccessToken" (submit)="onSubmit()">
+  <form
+    class="form"
+    [formGroup]="form"
+    *ngIf="personalAccessToken"
+    (submit)="onSubmit()"
+  >
     <mat-form-field class="search-form-field" appearance="fill">
       <mat-label>Search</mat-label>
       <input
         type="text"
         matInput
         placeholder="Start typing repository name..."
-        [formControl]="repoName"
+        formControlName="repoName"
       />
     </mat-form-field>
 
     <button
-      [disabled]="!repoName.value.trim() || loading"
+      [disabled]="!form.value.repoName.trim() || loading"
       (click)="onSubmit()"
       type="button"
       mat-raised-button
@@ -50,7 +56,7 @@
   </form>
 
   <!-- spinner -->
-  <mat-spinner class="spinner" *ngIf="loading"></mat-spinner>
+  <app-spinner *ngIf="loading"></app-spinner>
 
   <div *ngFor="let repo of repos | async">
     <app-item [repo]="repo"></app-item>
